@@ -8,7 +8,7 @@ import DisplayTechIcons from './DisplayTechIcons';
 
 
 type InterviewCardProps = {
-  interviewID: string;
+  interviewId: string;
   userId: string;
   role: string;
   type: string;
