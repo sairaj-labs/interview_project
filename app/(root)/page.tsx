@@ -9,24 +9,31 @@ import {
   getInterviewsByUserId,
   getLatestInterviews,
 } from "@/lib/actions/general.action";
+import { handleLogout } from "@/lib/actions/auth.action"; // ✅ Import the logout handler
 
 async function Home() {
   const user = await getCurrentUser();
 
   const [userInterviews, allInterview] = await Promise.all([
-    
     getInterviewsByUserId(user?.id!),
-    
     getLatestInterviews({ userId: user?.id! }),
   ]);
 
-  
   const hasPastInterviews = userInterviews?.length! > 0;
-  
   const hasUpcomingInterviews = allInterview?.length! > 0;
 
   return (
     <>
+      {/* ✅ Log Out button in a top-right flex box */}
+      <div className="flex justify-end mb-8 mt-[-86px]">
+  <form action={handleLogout}>
+    <Button type="submit" className="btn-secondary">
+      Log Out
+    </Button>
+  </form>
+</div>
+
+
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h2>Get Interview-Ready with AI-Powered Practice & Feedback</h2>
